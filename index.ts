@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { createUserInteractor } from './interactor/createUserInteractor';
 import { createUserPersistence } from './persistance/createUserPersistence';
-import { sendRegistrationEmailPersistence } from './sendRegistrationPersistence';
+import { sendRegistrationEmailPersistence } from './persistance/sendRegistrationPersistence';
 import { updateUserInteractor } from './interactor/updateUserInteractor';
 import { updateUserPersistence } from './persistance/updateUserPersistence';
 import { getAllUserInteractor } from './interactor/getAllUserInteractor';
