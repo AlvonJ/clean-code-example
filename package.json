@@ -1,0 +1,21 @@
+{
+  "name": "2.-clean-architecture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.ts"
+  },
+  "keywords": [],
+  "author": "Alvon Jovanus Chandra",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1450.0",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
