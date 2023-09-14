@@ -1,6 +1,6 @@
 import * as db from 'mysql';
 
-export const getAllUserPersistence = () => {
+export async function getUserPersistence({ id }: { id: string }) {
   const connection = db.createConnection({
     host: 'localhost',
     user: 'root',
@@ -10,8 +10,8 @@ export const getAllUserPersistence = () => {
 
   connection.connect();
 
-  const users = connection.query(
-    `SELECT * FROM users`,
+  const user = connection.query(
+    `SELECT * FROM users WHERE id = '${id}'`,
     (err, results, fields) => {
       if (err) {
         console.error(err);
@@ -23,5 +23,5 @@ export const getAllUserPersistence = () => {
 
   connection.end();
 
-  return users;
-};
+  return user;
+}

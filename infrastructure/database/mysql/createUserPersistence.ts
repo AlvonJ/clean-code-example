@@ -1,12 +1,12 @@
 import * as db from 'mysql';
 
-export const createUserPersistence = ({
+export async function createUserPersistence({
   username,
   password,
 }: {
   username: string;
   password: string;
-}) => {
+}) {
   const connection = db.createConnection({
     host: 'localhost',
     user: 'root',
@@ -30,4 +30,4 @@ export const createUserPersistence = ({
   connection.end();
 
   return user;
-};
+}

@@ -1,6 +1,6 @@
 import * as AWS from 'aws-sdk';
 
-export const sendRegistrationEmailPersistence = async ({
+export async function sendRegistrationEmailPersistence({
   email,
   subject,
   text,
@@ -8,7 +8,7 @@ export const sendRegistrationEmailPersistence = async ({
   email: string;
   subject: string;
   text: string;
-}): Promise<void> => {
+}): Promise<void> {
   const ses = new AWS.SES({
     region: 'us-east-1',
   });
@@ -31,4 +31,4 @@ export const sendRegistrationEmailPersistence = async ({
       Source: 'alvon@gmail.com',
     })
     .promise();
-};
+}

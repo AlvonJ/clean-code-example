@@ -1,6 +1,6 @@
 import * as db from 'mysql';
 
-export const updateUserPersistence = ({
+export async function updateUserPersistence({
   id,
   username,
   password,
@@ -8,7 +8,7 @@ export const updateUserPersistence = ({
   id: string;
   username: string;
   password: string;
-}) => {
+}) {
   const connection = db.createConnection({
     host: 'localhost',
     user: 'root',
@@ -32,4 +32,4 @@ export const updateUserPersistence = ({
   connection.end();
 
   return updatedUser;
-};
+}

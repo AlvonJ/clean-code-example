@@ -1,10 +1,10 @@
-export const deleteUserInteractor = async (
+export async function deleteUserInteractor(
   {
     deleteUserPersistence,
   }: {
     deleteUserPersistence: ({ id }: { id: string }) => Promise<void>;
   },
   { id }: { id: string }
-): Promise<void> => {
+): Promise<void> {
   await deleteUserPersistence({ id });
-};
+}

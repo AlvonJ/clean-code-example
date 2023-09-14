@@ -1,6 +1,6 @@
 import * as db from 'mysql';
 
-export const deleteUserPersistence = ({ id }: { id: string }) => {
+export async function getAllUserPersistence() {
   const connection = db.createConnection({
     host: 'localhost',
     user: 'root',
@@ -10,16 +10,18 @@ export const deleteUserPersistence = ({ id }: { id: string }) => {
 
   connection.connect();
 
-  connection.query(
-    `DELETE FROM users WHERE id = '${id}'`,
+  const users = connection.query(
+    `SELECT * FROM users`,
     (err, results, fields) => {
       if (err) {
         console.error(err);
+      } else {
+        return results;
       }
     }
   );
 
   connection.end();
 
-  return null;
-};
+  return users;
+}

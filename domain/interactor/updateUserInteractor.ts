@@ -1,6 +1,6 @@
 import { UserEntity } from '../entity/UserEntity';
 
-export const updateUserInteractor = async (
+export async function updateUserInteractor(
   {
     updateUserPersistence,
   }: {
@@ -15,7 +15,7 @@ export const updateUserInteractor = async (
     }) => Promise<UserEntity>;
   },
   { id, username, password }: { id: string; username: string; password: string }
-): Promise<UserEntity> => {
+): Promise<UserEntity> {
   const user = await new UserEntity({ username, password });
 
   // Check if username and password valid
@@ -24,4 +24,4 @@ export const updateUserInteractor = async (
   const updatedUser = await updateUserPersistence({ id, username, password });
 
   return updatedUser;
-};
+}

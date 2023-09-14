@@ -1,6 +1,6 @@
 import { UserEntity } from '../entity/UserEntity';
 
-export const createUserInteractor = async (
+export async function createUserInteractor(
   {
     sendRegistrationEmailPersistence,
     createUserPersistence,
@@ -23,7 +23,7 @@ export const createUserInteractor = async (
     }) => Promise<UserEntity>;
   },
   { username, password }: { username: string; password: string }
-): Promise<UserEntity> => {
+): Promise<UserEntity> {
   const user = await new UserEntity({ username, password });
 
   user.validate();
@@ -37,4 +37,4 @@ export const createUserInteractor = async (
   });
 
   return newUser;
-};
+}
