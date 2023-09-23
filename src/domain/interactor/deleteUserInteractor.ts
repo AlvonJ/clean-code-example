@@ -1,10 +1,14 @@
+interface HasId {
+  id: string;
+}
+
 export async function deleteUserInteractor(
   {
     deleteUserPersistence,
   }: {
-    deleteUserPersistence: ({ id }: { id: string }) => Promise<void>;
+    deleteUserPersistence: ({ id }: HasId) => Promise<void>;
   },
-  { id }: { id: string }
+  { id }: HasId
 ): Promise<void> {
   await deleteUserPersistence({ id });
 }

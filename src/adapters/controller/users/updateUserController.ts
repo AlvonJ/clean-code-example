@@ -1,17 +1,17 @@
 import { updateUserInteractor } from '../../../domain/interactor/updateUserInteractor';
-import { updateUserPersistence } from '../../../infrastructure/database/mysql/updateUserPersistence';
+import { updateUserPersistence } from '../../../infrastructure/database/mongodb/updateUserPersistence.js';
 
 // Update User
 export async function updateUser(req, res, next): Promise<void> {
   const { id } = req.params;
-  const { username, password } = req.body;
+  const { username, password, phone, email } = req.body;
 
   try {
     const updatedUser = await updateUserInteractor(
       {
         updateUserPersistence,
       },
-      { id, username, password }
+      { id, username, password, phone, email }
     );
 
     res.status(200).json({

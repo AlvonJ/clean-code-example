@@ -1,14 +1,8 @@
 import * as db from 'mysql';
 
-export async function updateUserPersistence({
-  id,
-  username,
-  password,
-}: {
-  id: string;
-  username: string;
-  password: string;
-}) {
+import { UserInterface } from '../../../domain/entity/UserEntity.js';
+
+export async function updateUserPersistence(user: UserInterface) {
   const connection = db.createConnection({
     host: 'localhost',
     user: 'root',
@@ -19,7 +13,7 @@ export async function updateUserPersistence({
   connection.connect();
 
   const updatedUser = connection.query(
-    `UPDATE users SET username = '${username}', password = '${password}' WHERE id = ${id}`,
+    `UPDATE users SET username = '${user.username}', password = '${user.password}' WHERE id = ${user.id}`,
     (err, results, fields) => {
       if (err) {
         console.error(err);

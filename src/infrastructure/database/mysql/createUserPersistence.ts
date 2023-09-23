@@ -1,12 +1,8 @@
 import * as db from 'mysql';
 
-export async function createUserPersistence({
-  username,
-  password,
-}: {
-  username: string;
-  password: string;
-}) {
+import { UserInterface } from '../../../domain/entity/UserEntity.js';
+
+export async function createUserPersistence(user: UserInterface) {
   const connection = db.createConnection({
     host: 'localhost',
     user: 'root',
@@ -16,8 +12,8 @@ export async function createUserPersistence({
 
   connection.connect();
 
-  const user = connection.query(
-    `INSERT INTO users (username, password) VALUES (${username}, ${password})`,
+  const newUser = connection.query(
+    `INSERT INTO users (username, password, phone, email) VALUES (${user.username}, ${user.password}, ${user.phone}, ${user.email})`,
     (err, results, fields) => {
       if (err) {
         console.error(err);
@@ -29,5 +25,5 @@ export async function createUserPersistence({
 
   connection.end();
 
-  return user;
+  return newUser;
 }

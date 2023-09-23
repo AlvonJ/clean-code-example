@@ -1,10 +1,10 @@
 import { createUserInteractor } from '../../../domain/interactor/createUserInteractor';
-import { createUserPersistence } from '../../../infrastructure/database/mysql/createUserPersistence';
+import { createUserPersistence } from '../../../infrastructure/database/mongodb/createUserPersistence';
 import { sendRegistrationEmailPersistence } from '../../../infrastructure/database/mysql/sendRegistrationPersistence';
 
 // Create User
 export async function createUser(req, res, next): Promise<void> {
-  const { username, password } = req.body;
+  const { username, password, email, phone } = req.body;
 
   try {
     const newUser = await createUserInteractor(
@@ -12,7 +12,7 @@ export async function createUser(req, res, next): Promise<void> {
         sendRegistrationEmailPersistence,
         createUserPersistence,
       },
-      { username, password }
+      { username, password, email, phone }
     );
 
     res.status(201).json({

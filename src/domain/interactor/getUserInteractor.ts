@@ -1,12 +1,16 @@
 import { UserEntity } from '../entity/UserEntity';
 
+interface HasId {
+  id: string;
+}
+
 export async function getUserInteractor(
   {
     getUserPersistence,
   }: {
-    getUserPersistence: ({ id }: { id: string }) => Promise<UserEntity>;
+    getUserPersistence: ({ id }: HasId) => any;
   },
-  { id }: { id: string }
+  { id }: HasId
 ): Promise<UserEntity> {
   const user = await getUserPersistence({ id });
 
