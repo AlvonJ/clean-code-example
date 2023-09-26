@@ -1,6 +1,15 @@
 import { ObjectId } from 'mongodb';
 import { UserInterface } from '../../../domain/entity/UserEntity.js';
 import { client } from './index.js';
+import { getUserPersistence } from './getUserPersistence.js';
+
+function cleanNullValues(obj): void {
+  for (const propName in obj) {
+    if (obj[propName] === null || obj[propName] === undefined) {
+      delete obj[propName];
+    }
+  }
+}
 
 export async function updateUserPersistence(user: UserInterface) {
   try {
@@ -11,13 +20,17 @@ export async function updateUserPersistence(user: UserInterface) {
 
     const usersCollection = db.collection('users');
 
+    const updateValues = {
+      username: user.username,
+      email: user.email,
+      phone: user.phone,
+      password: user.password,
+    };
+
+    cleanNullValues(updateValues);
+
     const updateUser = {
-      $set: {
-        username: user.username,
-        phone: user.phone,
-        email: user.email,
-        password: user.password,
-      },
+      $set: updateValues,
     };
 
     const result = await usersCollection.updateOne(
@@ -27,7 +40,7 @@ export async function updateUserPersistence(user: UserInterface) {
 
     if (result.matchedCount === 0) throw new Error('User not found!');
 
-    return user;
+    return getUserPersistence({ id: user.id });
   } catch (err) {
     throw new Error(err);
   } finally {

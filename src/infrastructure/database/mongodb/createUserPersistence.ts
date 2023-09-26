@@ -10,6 +10,12 @@ export async function createUserPersistence(user: UserInterface) {
 
     const usersCollection = db.collection('users');
 
+    const isFound = await usersCollection.findOne({
+      email: user.email,
+    });
+
+    if (isFound !== null) throw new Error('Email has been registered');
+
     await usersCollection.insertOne(user);
 
     return user;

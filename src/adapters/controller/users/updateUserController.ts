@@ -11,7 +11,7 @@ export async function updateUser(req, res, next): Promise<void> {
       {
         updateUserPersistence,
       },
-      { id, username, password, phone, email }
+      { id, username, password, phone, email, isUpdating: true }
     );
 
     res.status(200).json({

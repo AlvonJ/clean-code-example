@@ -1,17 +1,27 @@
 import { client } from './index.js';
 
-export async function getAllUserPersistence() {
+export async function getAllUserPersistence({
+  limit,
+  page,
+}: {
+  limit: number;
+  page: number;
+}) {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
     const db = client.db('clean-architecture');
-
     const usersCollection = db.collection('users');
 
-    const cursor = usersCollection.find({});
+    const cursor = usersCollection
+      .find({})
+      .limit(+limit)
+      .skip((page - 1) * limit);
 
     const result = await cursor.toArray();
+
+    if (result.length === 0) throw new Error('Data not found');
 
     await cursor.close();
 

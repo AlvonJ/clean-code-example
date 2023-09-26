@@ -8,11 +8,13 @@ export async function updateUserInteractor(
   },
   user: UserInterface
 ): Promise<UserEntity> {
+  // Create a new UserEntity instance
   const updatedUserObject = new UserEntity(user);
 
   // Check if username and password valid
   updatedUserObject.validate();
 
+  // Update the user using the provided persistence function
   const updatedUser = await updateUserPersistence(user);
 
   return updatedUser;
