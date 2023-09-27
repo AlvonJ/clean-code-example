@@ -3,7 +3,7 @@ import { client } from './index.js';
 
 export async function getUserPersistence({ id }: { id: string }) {
   try {
-    // Connect the client to the server	(optional starting in v4.7)
+    // Connect the client to the server
     await client.connect();
 
     const db = client.db('clean-architecture');
