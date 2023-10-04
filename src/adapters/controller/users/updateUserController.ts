@@ -1,5 +1,5 @@
 import { updateUserInteractor } from '../../../domain/interactor/updateUserInteractor';
-import { updateUserPersistence } from '../../../infrastructure/database/mongodb/updateUserPersistence.js';
+import { updateUserPersistence } from '../../../infrastructure/database/mongodb/users/updateUserPersistence.js';
 
 // Update User
 export async function updateUser(req, res, next): Promise<void> {

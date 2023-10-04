@@ -1,5 +1,5 @@
 import { deleteUserInteractor } from '../../../domain/interactor/deleteUserInteractor';
-import { deleteUserPersistence } from '../../../infrastructure/database/mongodb/deleteUserPersistence';
+import { deleteUserPersistence } from '../../../infrastructure/database/mongodb/users/deleteUserPersistence';
 
 // Delete User
 export async function deleteUser(req, res, next): Promise<void> {

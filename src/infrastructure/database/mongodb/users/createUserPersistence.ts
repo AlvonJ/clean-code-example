@@ -1,5 +1,5 @@
-import { UserInterface } from '../../../domain/entity/UserEntity.js';
-import { client } from './index.js';
+import { UserInterface } from '../../../../domain/entity/UserEntity.js';
+import { client } from '../index.js';
 
 export async function createUserPersistence(user: UserInterface) {
   // Connect the client to the server

@@ -1,5 +1,5 @@
 import { getUserInteractor } from '../../../domain/interactor/getUserInteractor';
-import { getUserPersistence } from '../../../infrastructure/database/mongodb/getUserPersistence';
+import { getUserPersistence } from '../../../infrastructure/database/mongodb/users/getUserPersistence';
 
 // Read One User
 export async function getUser(req, res, next): Promise<void> {

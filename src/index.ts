@@ -1,23 +1,8 @@
-import express from 'express';
+import { createApp } from './app.js';
 
-import { userRouter } from './adapters/route/userRouter.js';
+const app = createApp();
+const port = process.env.port || 3000;
 
-const app = express();
-const port = process.env.PORT || 3000;
-
-app.use(express.json());
-
-app.use('/users', userRouter);
-
-// Error handling middleware
-app.use(function (err, req, res, next) {
-  console.log(err);
-  res.status(500).send({
-    status: 'error',
-    message: err.message,
-  });
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+export const server = app.listen(port, () =>
+  console.log(`Server is running on port ${port}`)
+);

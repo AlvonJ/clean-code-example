@@ -1,6 +1,6 @@
 import * as db from 'mysql';
 
-import { UserInterface } from '../../../domain/entity/UserEntity.js';
+import { UserInterface } from '../../../../domain/entity/UserEntity.js';
 
 export async function createUserPersistence(user: UserInterface) {
   const connection = db.createConnection({

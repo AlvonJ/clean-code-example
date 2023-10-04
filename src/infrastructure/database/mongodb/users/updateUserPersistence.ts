@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
-import { UserInterface } from '../../../domain/entity/UserEntity.js';
-import { client } from './index.js';
+import { UserInterface } from '../../../../domain/entity/UserEntity.js';
+import { client } from '../index.js';
 import { getUserPersistence } from './getUserPersistence.js';
 
 function cleanNullValues(obj): void {

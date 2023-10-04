@@ -1,6 +1,6 @@
 import { createUserInteractor } from '../../../domain/interactor/createUserInteractor';
-import { createUserPersistence } from '../../../infrastructure/database/mongodb/createUserPersistence';
-import { sendRegistrationEmailPersistence } from '../../../infrastructure/database/mysql/sendRegistrationPersistence';
+import { createUserPersistence } from '../../../infrastructure/database/mongodb/users/createUserPersistence';
+import { sendRegistrationEmailPersistence } from '../../../infrastructure/database/mysql/users/sendRegistrationPersistence';
 
 // Create User
 export async function createUser(req, res, next): Promise<void> {

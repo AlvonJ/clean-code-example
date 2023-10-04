@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb';
-import { client } from './index.js';
+import { client } from '../index.js';
 
 export async function getUserPersistence({ id }: { id: string }) {
   try {
