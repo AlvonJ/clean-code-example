@@ -6,6 +6,7 @@ import { createFakeUser } from '../../../infrastructure/database/mongodb/users/u
 
 describe('delete user example', () => {
   beforeEach(async () => {
+    jest.setTimeout(20000);
     await deleteAllUser();
   });
 
@@ -14,9 +15,7 @@ describe('delete user example', () => {
 
     const data = await createFakeUser();
 
-    const response = await request(app).delete(
-      `/users/${data[0]._id.toString()}`
-    );
+    const response = await request(app).delete(`/users/${data[0]._id.toString()}`);
 
     // expect http response
     expect(response.statusCode).toEqual(204);

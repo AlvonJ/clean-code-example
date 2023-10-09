@@ -1,4 +1,4 @@
-import { UserInterface } from '../../../../../domain/entity/UserEntity.js';
+import { PrivacyEnum, UserInterface } from '../../../../../domain/entity/UserEntity.js';
 import { faker } from '@faker-js/faker';
 import { client } from '../../index.js';
 import { getAllUserPersistence } from '../getAllUserPersistence.js';
@@ -10,18 +10,37 @@ export async function createFakeUser() {
       username: faker.person.firstName(),
       phone: faker.phone.number(),
       password: faker.internet.password(),
+      photo: faker.image.url(),
+      status: faker.person.bio(),
+      privacy: {
+        last_seen: PrivacyEnum.EVERYONE,
+        photo: faker.helpers.enumValue(PrivacyEnum),
+        status: faker.helpers.enumValue(PrivacyEnum),
+      },
     },
     {
       email: faker.internet.email(),
       username: faker.person.firstName(),
       phone: faker.phone.number(),
       password: faker.internet.password(),
+      photo: faker.image.url(),
+      privacy: {
+        last_seen: PrivacyEnum.EVERYONE,
+        photo: faker.helpers.enumValue(PrivacyEnum),
+        status: faker.helpers.enumValue(PrivacyEnum),
+      },
     },
     {
       email: faker.internet.email(),
       username: faker.person.firstName(),
       phone: faker.phone.number(),
       password: faker.internet.password(),
+      photo: faker.image.url(),
+      privacy: {
+        last_seen: PrivacyEnum.EVERYONE,
+        photo: faker.helpers.enumValue(PrivacyEnum),
+        status: faker.helpers.enumValue(PrivacyEnum),
+      },
     },
   ];
 

@@ -5,6 +5,7 @@ import { createFakeUser } from '../../../infrastructure/database/mongodb/users/u
 
 describe('get one user example', () => {
   beforeEach(async () => {
+    jest.setTimeout(20000);
     await deleteAllUser();
   });
 
@@ -24,5 +25,18 @@ describe('get one user example', () => {
     expect(response.body.data.email).toEqual(data[0].email);
     expect(response.body.data.phone).toEqual(data[0].phone);
     expect(response.body.data.password).toEqual(data[0].password);
+    expect(response.body.data.status).toEqual(data[0].status);
+    expect(response.body.data.photo).toEqual(data[0].photo);
+    expect(response.body.data.privacy).toEqual(data[0].privacy);
+  });
+
+  it('should be error when no user found', async () => {
+    const app = createApp();
+
+    const response = await request(app).get(`/users/12325320b7681b6c0b567bd5`);
+
+    expect(response.statusCode).toEqual(404);
+    expect(response.body.status).toEqual('error');
+    expect(response.body.message).toEqual('No users found with that ID');
   });
 });

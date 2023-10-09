@@ -1,4 +1,4 @@
-import { UserEntity, UserInterface } from '../entity/UserEntity';
+import { UserEntity, UserInterface } from '../../entity/UserEntity';
 
 interface EmailInfo {
   email: string;
@@ -12,7 +12,7 @@ export async function createUserInteractor(
     createUserPersistence,
   }: {
     sendRegistrationEmailPersistence: (info: EmailInfo) => Promise<void>;
-    createUserPersistence: (user: UserInterface) => Promise<UserInterface>;
+    createUserPersistence: (user: UserInterface) => Promise<any>;
   },
   user: UserInterface
 ): Promise<UserInterface> {
@@ -20,7 +20,9 @@ export async function createUserInteractor(
 
   userObject.validate();
 
-  const newUser = await createUserPersistence(user);
+  const userWithCreatedAt = { ...user, privacy: userObject.privacy, created_at: Date.now() };
+
+  const newUser = await createUserPersistence(userWithCreatedAt);
 
   await sendRegistrationEmailPersistence({
     email: user.username,

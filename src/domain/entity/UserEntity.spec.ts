@@ -7,6 +7,8 @@ describe('UserEntity', () => {
     phone: '1234567890',
     username: 'testuser',
     password: 'password123',
+    photo: 'asdsada.jpg',
+    status: 'test',
   };
 
   // Test the constructor and validation methods
@@ -22,18 +24,117 @@ describe('UserEntity', () => {
     expect(userEntity.phone).toBe(sampleUserData.phone);
     expect(userEntity.username).toBe(sampleUserData.username);
     expect(userEntity.password).toBe(sampleUserData.password);
+    expect(userEntity.photo).toBe(sampleUserData.photo);
+    expect(userEntity.status).toBe(sampleUserData.status);
     expect(userEntity.isUpdating).toBe(false);
 
     // Validate the user
     expect(() => userEntity.validate()).not.toThrow();
   });
 
-  it('should throw an error when creating a UserEntity instance with invalid data', () => {
+  it('should throw an error when creating a UserEntity instance with invalid email', () => {
     const invalidUserData: UserInterface = {
       email: 'invalid-email', // Invalid email
       phone: '1234567890',
       username: 'testuser',
-      password: 'short', // Password too short
+      password: 'short123',
+      photo: 'asdsada.jpg',
+    };
+
+    expect(() => new UserEntity(invalidUserData).validate()).toThrow();
+  });
+
+  it('should throw an error when creating a UserEntity instance with invalid phone', () => {
+    const invalidUserData: UserInterface = {
+      email: 'test@gmail.com',
+      phone: '1234567890a', // Phone contains alphabet
+      username: 'testuser',
+      password: 'short123',
+      photo: 'asdsada.jpg',
+    };
+
+    expect(() => new UserEntity(invalidUserData).validate()).toThrow();
+  });
+
+  it('should throw an error when creating a UserEntity instance with invalid username', () => {
+    const invalidUserData: UserInterface = {
+      email: 'test@gmail.com',
+      phone: '1234567890',
+      username: 'testuser@', // Username contains special characters
+      password: 'short123',
+      photo: 'asdsada.jpg',
+    };
+
+    expect(() => new UserEntity(invalidUserData).validate()).toThrow();
+  });
+
+  it('should throw an error when creating a UserEntity instance with invalid password', () => {
+    const invalidUserData: UserInterface = {
+      email: 'test@gmail.com',
+      phone: '1234567890',
+      username: 'testuser',
+      password: 'shor', // Password less than 6 characters
+      photo: 'asdsada.jpg',
+    };
+
+    expect(() => new UserEntity(invalidUserData).validate()).toThrow();
+  });
+
+  it('should throw an error when creating a UserEntity instance with invalid photo url', () => {
+    const invalidUserData: UserInterface = {
+      email: 'test@gmail.com',
+      phone: '1234567890',
+      username: 'testuser',
+      password: 'short123',
+      photo: 'asdsada', // photo url is not valid
+    };
+
+    expect(() => new UserEntity(invalidUserData).validate()).toThrow();
+  });
+
+  it('should throw an error when creating a UserEntity with no phone', () => {
+    const invalidUserData: UserInterface = {
+      email: 'test@gmail.com',
+      phone: undefined,
+      username: 'testuser',
+      password: 'short123',
+      photo: 'asdsada.jpg',
+    };
+
+    expect(() => new UserEntity(invalidUserData).validate()).toThrow();
+  });
+
+  it('should throw an error when creating a UserEntity with no email', () => {
+    const invalidUserData: UserInterface = {
+      email: undefined,
+      phone: '1234567890',
+      username: 'testuser',
+      password: 'short123',
+      photo: 'asdsada.jpg',
+    };
+
+    expect(() => new UserEntity(invalidUserData).validate()).toThrow();
+  });
+
+  it('should throw an error when creating a UserEntity with no username', () => {
+    const invalidUserData: UserInterface = {
+      email: 'test@gmail.com',
+      phone: '1234567890',
+      username: undefined,
+      password: 'short123',
+      photo: 'asdsada.jpg',
+    };
+
+    expect(() => new UserEntity(invalidUserData).validate()).toThrow();
+  });
+
+  it('should throw an error when creating a UserEntity with no password', () => {
+    const invalidUserData: UserInterface = {
+      email: 'test@gmail.com',
+      phone: '1234567890',
+      username: 'testuser',
+      password: undefined,
+      photo: 'asdsada.jpg',
     };
 
     expect(() => new UserEntity(invalidUserData).validate()).toThrow();

@@ -1,8 +1,10 @@
-import { deleteUserInteractor } from '../../../domain/interactor/deleteUserInteractor';
+import { Request, Response, NextFunction } from 'express';
+
+import { deleteUserInteractor } from '../../../domain/interactor/users/deleteUserInteractor';
 import { deleteUserPersistence } from '../../../infrastructure/database/mongodb/users/deleteUserPersistence';
 
 // Delete User
-export async function deleteUser(req, res, next): Promise<void> {
+export async function deleteUser(req: Request, res: Response, next: NextFunction): Promise<void> {
   const { id } = req.params;
 
   try {

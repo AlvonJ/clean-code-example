@@ -1,12 +1,6 @@
 import { client } from '../index.js';
 
-export async function getAllUserPersistence({
-  limit,
-  page,
-}: {
-  limit: number;
-  page: number;
-}) {
+export async function getAllUserPersistence({ limit, page }: { limit: number; page: number }) {
   try {
     // Connect the client to the server
     await client.connect();
@@ -20,8 +14,6 @@ export async function getAllUserPersistence({
       .skip((page - 1) * limit);
 
     const result = await cursor.toArray();
-
-    if (result.length === 0) throw new Error('Data not found');
 
     await cursor.close();
 

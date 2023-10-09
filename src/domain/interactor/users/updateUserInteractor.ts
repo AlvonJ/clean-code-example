@@ -1,4 +1,4 @@
-import { UserEntity, UserInterface } from '../entity/UserEntity';
+import { UserEntity, UserInterface } from '../../entity/UserEntity';
 
 export async function updateUserInteractor(
   {
@@ -13,6 +13,8 @@ export async function updateUserInteractor(
 
   // Check if username and password valid
   updatedUserObject.validate();
+
+  if (user.privacy) user.privacy = updatedUserObject.privacy;
 
   // Update the user using the provided persistence function
   const updatedUser = await updateUserPersistence(user);
