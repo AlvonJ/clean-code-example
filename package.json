@@ -9,7 +9,7 @@
     "build": "tsc-esm",
     "test": "npm run build && jest dist --runInBand",
     "test:dev": "jest --runInBand",
-    "test:coverage": "rimraf coverage && npm run test -- --coverage --runInBand"
+    "test:coverage": "npm run build && rimraf coverage && jest dist --coverage --runInBand"
   },
   "jest": {
     "transform": {
